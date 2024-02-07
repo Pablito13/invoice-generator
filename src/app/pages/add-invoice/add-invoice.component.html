@@ -1,0 +1,33 @@
+<form [formGroup]="invoiceForm" (ngSubmit)="onSubmit()">
+  <div formArrayName="items">
+    <ng-container *ngFor="let itemForm of items.controls; let i=index">
+      <div [formGroupName]="i" class="add-invoice-item">
+        <mat-form-field>
+          <mat-label>Name</mat-label>
+          <input matInput
+                 type="text"
+                 placeholder="Name"
+                 formControlName="name">
+          <mat-error *ngIf="items.controls[i].get('name')?.hasError('minlength')">Too short</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Count</mat-label>
+          <input matInput
+                 type="number"
+                 formControlName="count">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Price</mat-label>
+          <input matInput
+                 type="number"
+                 formControlName="price">
+        </mat-form-field>
+        <button mat-mini-fab color="warn" (click)="deleteItem(i)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </ng-container>
+  </div>
+  <button mat-raised-button color="primary" type="button" (click)="addNewItem()">Add new item</button>
+  <button mat-raised-button color="primary" type="submit">Submit</button>
+</form>
