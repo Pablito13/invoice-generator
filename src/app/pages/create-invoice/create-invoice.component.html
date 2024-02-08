@@ -1,7 +1,7 @@
 <form [formGroup]="invoiceForm" (ngSubmit)="onSubmit()">
   <div formArrayName="items">
     <ng-container *ngFor="let itemForm of items.controls; let i=index">
-      <div [formGroupName]="i" class="add-invoice-item">
+      <div [formGroupName]="i" class="create-invoice-item">
         <mat-form-field>
           <mat-label>Name</mat-label>
           <input matInput

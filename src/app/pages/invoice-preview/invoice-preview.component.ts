@@ -1,9 +1,10 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { CompanyDataService } from '../../company-data.service';
-import { CompanyDataModel } from '../../models/company-data.model';
+import { CompanyDataService } from '../../services/company-data.service';
+import { CompanyData } from '../../types/company-data';
 import { Observable } from 'rxjs';
-import { InvoiceService } from '../../invoice.service';
-import { InvoiceItemModel } from '../../models/invoice-item.model';
+import { InvoiceService } from '../../services/invoice.service';
+import { InvoiceItemModel } from '../../types/invoice-item.model';
+import { shareReplay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-invoice-preview',
@@ -13,16 +14,16 @@ import { InvoiceItemModel } from '../../models/invoice-item.model';
 })
 export class InvoicePreviewComponent implements OnInit {
 
-  companyData$: Observable<CompanyDataModel> = this.companyDataService.fetchData();
-  invoiceItems?: InvoiceItemModel[];
-  invoiceSum?: number;
+  public companyData$: Observable<CompanyData> = this.companyDataService.fetchData().pipe(shareReplay(1));
+  public invoiceItems: InvoiceItemModel[] = [];
+  public invoiceSum: number = 0;
 
   constructor(
     private companyDataService: CompanyDataService,
     private invoiceService: InvoiceService) {
   }
 
-  ngOnInit() {
+  public ngOnInit() {
     this.invoiceItems = this.invoiceService.getItems();
     this.invoiceSum = this.invoiceService.countInvoiceSum();
   }

@@ -1,4 +1,4 @@
-export interface CompanyDataModel {
+export interface CompanyData {
   name: string;
   address: string;
   phones: string[];

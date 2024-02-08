@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
@@ -6,7 +6,8 @@ import { map, shareReplay } from 'rxjs/operators';
 @Component({
   selector: 'app-navigation',
   templateUrl: './navigation.component.html',
-  styleUrl: './navigation.component.less'
+  styleUrl: './navigation.component.less',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NavigationComponent {
   private breakpointObserver = inject(BreakpointObserver);
