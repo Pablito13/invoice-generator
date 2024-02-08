@@ -1,1 +1,23 @@
-<p>invoice-preview works!</p>
+<div *ngIf="companyData$ | async as companyData else loader" class="info-box">
+  <h1>{{companyData.name}}</h1>
+  <p>address: {{companyData.address}}</p>
+  <p>phones: {{companyData.phones}}</p>
+</div>
+
+<ng-template #loader>
+  <mat-spinner></mat-spinner>
+</ng-template>
+
+<div *ngIf="invoiceItems?.length else emptyView" class="invoice-list">
+  <h2>Items:</h2>
+  <div *ngFor="let item of invoiceItems" class="invoice-item">
+    <div>{{item.name}}</div>
+    <div>{{item.count}}</div>
+    <div>{{item.price}}</div>
+  </div>
+  {{invoiceSum}}
+</div>
+
+<ng-template #emptyView>
+  <h1>No items to show</h1>
+</ng-template>

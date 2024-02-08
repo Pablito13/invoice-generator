@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { delay, Observable } from 'rxjs';
 import { CompanyDataModel } from './models/company-data.model';
 import { HttpClient } from '@angular/common/http';
 
@@ -12,6 +12,6 @@ export class CompanyDataService {
   }
 
   fetchData(): Observable<CompanyDataModel> {
-    return this.http.get<CompanyDataModel>('assets/company.json');
+    return this.http.get<CompanyDataModel>('assets/company.json').pipe(delay(2_000)); //delay for demo only
   }
 }

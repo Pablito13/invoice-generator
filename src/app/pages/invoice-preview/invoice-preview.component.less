@@ -1,0 +1,26 @@
+.info-box {
+  display: inline-block;
+  border: 1px solid black;
+  border-radius: 10px;
+  margin: 10px;
+  padding: 20px;
+}
+
+.invoice-list {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+
+.invoice-item {
+  display: flex;
+  column-gap: 30px;
+
+  &:nth-child(even) {
+    background-color: red;
+  }
+
+  & > div {
+    flex: 1;
+  }
+}
