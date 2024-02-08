@@ -8,26 +8,40 @@
                  type="text"
                  placeholder="Name"
                  formControlName="name">
-          <mat-error *ngIf="items.controls[i].get('name')?.hasError('minlength')">Too short</mat-error>
+          <mat-error *ngIf="hasError(i, 'name', 'required')">Field is required</mat-error>
+          <mat-error *ngIf="hasError(i, 'name', 'minlength')">Too short</mat-error>
+          <mat-error *ngIf="hasError(i, 'name', 'maxlength')">Too long</mat-error>
         </mat-form-field>
         <mat-form-field>
           <mat-label>Count</mat-label>
           <input matInput
                  type="number"
                  formControlName="count">
+          <mat-error *ngIf="hasError(i, 'count', 'required')">Field is required</mat-error>
+          <mat-error *ngIf="hasError(i, 'count', 'min')">Value is too small</mat-error>
+          <mat-error *ngIf="hasError(i, 'count', 'max')">Value is too high</mat-error>
         </mat-form-field>
         <mat-form-field>
           <mat-label>Price</mat-label>
           <input matInput
                  type="number"
                  formControlName="price">
+          <mat-error *ngIf="hasError(i, 'price', 'required')">Field is required</mat-error>
+          <mat-error *ngIf="hasError(i, 'price', 'min')">Value is too small</mat-error>
+          <mat-error *ngIf="hasError(i, 'price', 'max')">Value is too high</mat-error>
         </mat-form-field>
-        <button mat-mini-fab color="warn" (click)="deleteItem(i)">
+        <button mat-icon-button color="warn" class="mat-elevation-z0" (click)="deleteItem(i)">
           <mat-icon>delete</mat-icon>
         </button>
       </div>
     </ng-container>
   </div>
-  <button mat-raised-button color="primary" type="button" (click)="addNewItem()">Add new item</button>
-  <button mat-raised-button color="primary" type="submit">Submit</button>
+
+  <div class="form-bar">
+    <button mat-flat-button color="accent" type="button" (click)="addNewItem()">
+      <mat-icon>add</mat-icon>
+      Add new item
+    </button>
+    <button mat-flat-button color="primary" type="submit">Submit</button>
+  </div>
 </form>
