@@ -42,6 +42,10 @@
       <mat-icon>add</mat-icon>
       Add new item
     </button>
+    <div *ngIf="isAddItemHintActive()" class="tip-message">
+      <mat-icon>info</mat-icon>
+      Please add items
+    </div>
     <button mat-flat-button color="primary" type="submit">Submit</button>
   </div>
 </form>

@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CreateInvoiceComponent {
+  private submitted: boolean = false;
   public invoiceForm: FormGroup = this.formBuilder.group({
     items: this.formBuilder.array([this.createItem()])
   });
@@ -24,9 +25,9 @@ export class CreateInvoiceComponent {
   }
 
   public onSubmit() {
-    if (this.items.length === 0) {
+    this.submitted = true;
 
-    } else if (this.invoiceForm.valid) {
+    if (this.invoiceForm.valid && this.items.length > 0) {
       this.invoiceService.addItems(this.items.getRawValue());
       this.router.navigate(['/invoice-preview']);
     }
@@ -50,5 +51,9 @@ export class CreateInvoiceComponent {
 
   public hasError(idx: number, controlName: string, errorCode: string): boolean | undefined {
     return this.items.controls[idx].get(controlName)?.hasError(errorCode);
+  }
+
+  public isAddItemHintActive(): boolean {
+    return this.submitted && this.items.length === 0;
   }
 }

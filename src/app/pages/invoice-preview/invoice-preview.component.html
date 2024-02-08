@@ -10,12 +10,13 @@
 
 <div *ngIf="invoiceItems?.length else emptyView" class="invoice-list">
   <h2>Items:</h2>
-  <div *ngFor="let item of invoiceItems" class="invoice-item">
+  <div *ngFor="let item of invoiceItems; let i=index" class="invoice-item">
+    <div>{{i+1}}.</div>
     <div>{{item.name}}</div>
     <div>{{item.count}}</div>
     <div>{{item.price}}</div>
   </div>
-  {{invoiceSum}}
+  <h2>Sum: {{invoiceSum}}</h2>
 </div>
 
 <ng-template #emptyView>
