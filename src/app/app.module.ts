@@ -17,6 +17,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatCardModule } from '@angular/material/card';
 import { ReactiveFormsModule } from '@angular/forms';
 import { InvoicePreviewComponent } from './pages/invoice-preview/invoice-preview.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { InvoicePreviewComponent } from './pages/invoice-preview/invoice-preview
     MatSelectModule,
     MatRadioModule,
     MatCardModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [
     provideAnimationsAsync()
